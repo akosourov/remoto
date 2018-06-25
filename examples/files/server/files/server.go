@@ -12,7 +12,7 @@ import (
 	"strconv"
 
 	"github.com/matryer/remoto/go/remotohttp"
-	"github.com/matryer/remoto/remototypes"
+	"github.com/matryer/remoto/go/remotohttp/remototypes"
 	"github.com/pkg/errors"
 )
 
@@ -122,8 +122,6 @@ func (srv *httpImagesServer) handleFlip(w http.ResponseWriter, r *http.Request) 
 }
 
 // this is here so we don't get a compiler complaints.
-func init() {
-	var _ = remototypes.File{}
-	var _ = strconv.Itoa(0)
-	var _ = io.EOF
-}
+var _ = remototypes.File{}
+var _ = strconv.Itoa(0)
+var _ = io.EOF

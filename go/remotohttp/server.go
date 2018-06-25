@@ -1,12 +1,9 @@
 package remotohttp
 
 import (
-	"context"
 	"io"
 	"net/http"
 	"sync"
-
-	"github.com/matryer/remoto/remototypes"
 )
 
 // Server is an HTTP server for serving Remoto requests.
@@ -49,11 +46,6 @@ func (srv *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	if !ok {
 		panic("remotohttp: handler is the wrong type")
 	}
-	opener := func(_ context.Context, file remototypes.File) (io.ReadCloser, error) {
-		f, _, err := r.FormFile(file.Fieldname)
-		return f, err
-	}
-	r = r.WithContext(remototypes.WithOpener(r.Context(), opener))
 	handler.ServeHTTP(w, r)
 }
 
